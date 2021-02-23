@@ -513,6 +513,12 @@ kind::image::prepare() {
     return 0
   fi
 
+  if [ -n "${NODE_IMAGE+x}" ]
+  then
+      echo "${NODE_IMAGE}"
+      return 0
+  fi
+
   # Fallback to not using a special node image, use the default from kind
   # upstream
 }

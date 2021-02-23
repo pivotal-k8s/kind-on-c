@@ -152,38 +152,40 @@ matches the version of kubernetes deployed.
   version of kubernetes in parallel. You could have one step which builds the
   [node image], exports it as and OCI image, and pushes it to a registry and then
   some more parallel jobs that consume that image. With that approach you don't
-  need to compile the smae [node image] over and over.  
-  See also [the ouput `exported-node-image`](#out-exported-node-image).  
+  need to compile the smae [node image] over and over.
+  See also [the ouput `exported-node-image`](#out-exported-node-image).
   _Note_: If the task is configured to use upstream kind's default [node image],
   this feature is not available. A warning is printed and the output is kept
   empty.
-- <a id="install-metallb"></a> `INSTALL_METALLB`  
+- <a id="install-metallb"></a> `INSTALL_METALLB`
   If this parameter is set, [metallb] is installed onto the cluster. This
   allows users to deploy services of type `LoadBalancer` and get an
   `EXTERNAL-IP` for those.  This external IP can be used to connect to a
   exposed service from the task container, thus from code running in
   `KIND_TESTS`.
-- `KIND_PRE_START`  
+- `KIND_PRE_START`
   ... if you want or need to run something just before the kind cluster is
   started
-- `DOCKERD_OPTS`  
+- `DOCKERD_OPTS`
   ... if you need to add some configs when starting the docker daemon
-- `DOCKERD_TIMEOUT`  
+- `DOCKERD_TIMEOUT`
   ... how long do you want to wait for docker to come up?
-- `KINDONC_DEBUG`  
+- `KINDONC_DEBUG`
   ... if you want to see all the ugly things that are happening to bring up docker and to run kind
-- `KIND_LOGLEVEL`  
-  ... make kind more or less verbose when it is doing its business.  
-  For kind `<= 0.5.1` this value is used for the `--loglevel` option and needs to be one of `panic`, `fatal`, `error`, `warning`, `info`, `debug`.  
-  For kind `> 0.5.1` this value is used for the `--verbosity` option and needs to be and integer. 
-- `KIND_CLUSTER_NAME`  
+- `KIND_LOGLEVEL`
+  ... make kind more or less verbose when it is doing its business.
+  For kind `<= 0.5.1` this value is used for the `--loglevel` option and needs to be one of `panic`, `fatal`, `error`, `warning`, `info`, `debug`.
+  For kind `> 0.5.1` this value is used for the `--verbosity` option and needs to be and integer.
+- `KIND_CLUSTER_NAME`
   ... in case you want to change kind's cluster name -- you actually should not need to do that ...
+- `NODE_IMAGE`
+  ... in case you want to pull the kind node image from somewhere else ...
 
 # Well known task inputs & outputs
 
 ## Inputs
 
-- `kind-on-c`, _mandatory_  
+- `kind-on-c`, _mandatory_
   The file tree of this repo. At least the [task file](./kind.yaml) and [the
   entrypoint](./entrypoint.sh) will (or should) be used from this input, in
   future potentially more.
